@@ -1,0 +1,14 @@
+.messages_container {
+	display: grid;
+	grid-template-columns: 2fr 10fr;
+}
+.chats {
+	border-right: 1px solid #edeef0;
+}
+
+.chats .chat.active {
+	color: gold;
+}
+.messages {
+	padding: 10px;
+}
