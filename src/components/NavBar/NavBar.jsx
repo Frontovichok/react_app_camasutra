@@ -13,9 +13,15 @@ function NavBar() {
 				</NavLink>
 			</div>
 			<div className={styles.item}>
-				<Icon name='discussions outline' />
+				<Icon className='discussions outline' />
 				<NavLink exact to='/messages' activeClassName={styles.active}>
 					Messages
+				</NavLink>
+			</div>
+			<div className={styles.item}>
+				<Icon className='users' />
+				<NavLink exact to='/users' activeClassName={styles.active}>
+					Users
 				</NavLink>
 			</div>
 			<div className={styles.item}>

@@ -33,12 +33,11 @@ function profileReducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_POST:
 			let newPost = {
-				id: state.posts.length,
+				id: state.posts.length + 1,
 				message: action.data.message,
 				imageUrl: action.data.imageUrl,
 			}
-			state.posts.push(newPost)
-			return state
+			return { ...state, posts: [...state.posts, newPost] }
 		default:
 			return state
 	}

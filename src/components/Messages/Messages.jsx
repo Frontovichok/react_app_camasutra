@@ -2,29 +2,19 @@ import React from 'react'
 import styles from './Messages.module.css'
 import ChatWith from './ChatWith/ChatWith'
 import Message from './Message/Message'
-import {
-	updateNewMessageBodyActionCreator,
-	sendMessageActionCreator,
-} from '../../redux/reducers/messages-reducer'
 
 function Messages(props) {
-	let messageTextareaRef = React.createRef()
-
-	let chatWithElements = props.state.chats.map((chat) => (
-		<ChatWith id={chat.id} name={chat.name} avatarUrl={chat.avatarUrl} />
+	let chatWithElements = props.messagesPage.chats.map((chat) => (
+		<ChatWith
+			key={chat.id}
+			id={chat.id}
+			name={chat.name}
+			avatarUrl={chat.avatarUrl}
+		/>
 	))
-	let messagesElements = props.state.chats[0].messages.map((message) => (
-		<Message message={message.message} />
-	))
-
-	let handleClick = (e) => {
-		let chatId = window.location.pathname.split('/').pop()
-		props.dispatch(sendMessageActionCreator(chatId))
-	}
-	let handleChange = (e) => {
-		let body = e.target.value
-		props.dispatch(updateNewMessageBodyActionCreator(body))
-	}
+	let messagesElements = props.messagesPage.chats[0].messages.map(
+		(message, i) => <Message key={i} message={message.message} />
+	)
 
 	return (
 		<div className={styles.messages_container}>
@@ -33,11 +23,10 @@ function Messages(props) {
 				<div>{messagesElements}</div>
 				<div>
 					<textarea
-						onChange={handleChange}
-						ref={messageTextareaRef}
-						value={props.state.newMessageBody}
+						onChange={(e) => props.changeMessageBody(e.target.value)}
+						value={props.messagesPage.newMessageBody}
 					/>
-					<button onClick={handleClick}>Send message</button>
+					<button onClick={props.sendMessage}>Send message</button>
 				</div>
 			</div>
 		</div>

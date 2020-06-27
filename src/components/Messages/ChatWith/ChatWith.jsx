@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './ChatWith.module.css'
 import { NavLink } from 'react-router-dom'
 
-function Chat(props) {
+function ChatWith(props) {
 	const path = '/messages/' + props.id
 	return (
 		<div className={styles.chat}>
@@ -14,4 +14,4 @@ function Chat(props) {
 	)
 }
 
-export default Chat
+export default ChatWith
