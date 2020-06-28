@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		toggleFollow: (userId) => dispatch(toggleFollowActionCreator(userId)),
-		setUsers: () => dispatch(setUsersActionCreator()),
+		setUsers: (users) => dispatch(setUsersActionCreator(users)),
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
