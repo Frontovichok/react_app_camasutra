@@ -1,5 +1,5 @@
 import MyPosts from './MyPosts'
-import { addPostActionCreator } from '../../../redux/reducers/profile-reducer'
+import { addPost } from '../../../redux/reducers/profile-reducer'
 import { connect } from 'react-redux'
 
 let getImageUrl = async () => {
@@ -28,7 +28,7 @@ function mapDispatchToPtops(dispatch) {
 	return {
 		addPost: (text) => {
 			getImageUrl().then((imageUrl) => {
-				dispatch(addPostActionCreator(text, imageUrl))
+				dispatch(addPost(text, imageUrl))
 			})
 		},
 	}

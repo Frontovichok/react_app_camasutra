@@ -4,6 +4,9 @@
 	justify-content: space-around;
 	padding: 5px 0;
 }
+.chat.active {
+	color: #ff10b6;
+}
 .chat img {
 	width: 40px;
 	height: 40px;

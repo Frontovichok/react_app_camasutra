@@ -1,0 +1,13 @@
+.page {
+	font-size: 18px;
+	margin: 5px;
+}
+.selectedPage {
+	font-weight: bold;
+	color: red;
+}
+.pagesContainer {
+	height: 86px;
+	overflow-y: auto;
+	padding: 10px 5px;
+}

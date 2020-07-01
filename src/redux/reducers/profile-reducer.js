@@ -1,4 +1,5 @@
 const ADD_POST = 'ADD-POST'
+const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
 let initialState = {
 	posts: [
@@ -27,6 +28,7 @@ let initialState = {
 				'https://im.kommersant.ru/Issues.photo/AUTO_News/2019/04/18/KMO_152985_04194_1_t218_181856.jpg',
 		},
 	],
+	profile: {},
 }
 
 function profileReducer(state = initialState, action) {
@@ -38,15 +40,24 @@ function profileReducer(state = initialState, action) {
 				imageUrl: action.data.imageUrl,
 			}
 			return { ...state, posts: [...state.posts, newPost] }
+
+		case SET_USER_PROFILE:
+			return { ...state, profile: action.profile }
 		default:
 			return state
 	}
 }
 
-export const addPostActionCreator = (message, imageUrl) => {
+export const addPost = (message, imageUrl) => {
 	return {
 		type: ADD_POST,
 		data: { message: message, imageUrl: imageUrl },
+	}
+}
+export const setUserProfile = (profile) => {
+	return {
+		type: SET_USER_PROFILE,
+		profile: profile,
 	}
 }
 

@@ -5,14 +5,14 @@ import {
 } from '../../redux/reducers/messages-reducer'
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 function mapStateToProps(state) {
 	return { messagesPage: state.messagesPage }
 }
 function mapDispatchToPtops(dispatch) {
 	return {
-		sendMessage: (e) => {
-			let chatId = window.location.pathname.split('/').pop()
+		sendMessage: (chatId) => {
 			dispatch(sendMessageActionCreator(chatId))
 		},
 		changeMessageBody: (body) => {
@@ -21,6 +21,11 @@ function mapDispatchToPtops(dispatch) {
 	}
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToPtops)(Messages)
+let withUrlDataContainerComponent = withRouter(Messages)
+
+const MessagesContainer = connect(
+	mapStateToProps,
+	mapDispatchToPtops
+)(withUrlDataContainerComponent)
 
 export default MessagesContainer

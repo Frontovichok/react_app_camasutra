@@ -1,21 +1,36 @@
 import React from 'react'
 import styles from './User.module.css'
+import { NavLink } from 'react-router-dom'
 
 function User(props) {
-	console.log(props)
 	let userData = props.userData
 	return (
 		<div className={styles.user}>
 			<div className={styles.avatar_and_follow}>
-				<img alt='avatar' src={userData.imageUrl} />
-				<button onClick={() => props.toggleFollow(userData.id)}>
-					{userData.followed === true ? 'отписаться' : 'подписаться'}
+				<NavLink
+					to={`/profile/${props.userData.id}`}
+					className={styles.image_link}
+				>
+					<img
+						alt='avatar'
+						src={
+							userData.photos.large
+								? userData.photos.large
+								: 'https://avatarfiles.alphacoders.com/191/thumb-191938.jpg'
+						}
+					/>
+				</NavLink>
+				<button
+					onClick={() => props.toggleFollow(userData.id)}
+					className={userData.followed ? styles.followed : ''}
+				>
+					{userData.followed ? 'отписаться' : 'подписаться'}
 				</button>
 			</div>
 
-			<span>{userData.fullName}</span>
-			<span>{userData.location.city}</span>
-			<span>{userData.location.country}</span>
+			<span>{userData.fullName ? userData.fullName : userData.name}</span>
+			<span>{userData.location ? userData.location.city : 'Moscow-'}</span>
+			<span>{userData.location ? userData.country : 'Russia-'}</span>
 			<span>{userData.status}</span>
 		</div>
 	)

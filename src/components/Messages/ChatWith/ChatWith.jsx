@@ -7,7 +7,11 @@ function ChatWith(props) {
 	return (
 		<div className={styles.chat}>
 			<img alt='img' src={props.avatarUrl} />
-			<NavLink to={path} className={styles.chat}>
+			<NavLink
+				to={path}
+				className={styles.chat}
+				activeClassName={styles.active}
+			>
 				{props.name}
 			</NavLink>
 		</div>

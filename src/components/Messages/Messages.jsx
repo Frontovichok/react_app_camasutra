@@ -26,7 +26,9 @@ function Messages(props) {
 						onChange={(e) => props.changeMessageBody(e.target.value)}
 						value={props.messagesPage.newMessageBody}
 					/>
-					<button onClick={props.sendMessage}>Send message</button>
+					<button onClick={() => props.sendMessage(props.match.params.chatId)}>
+						Send message
+					</button>
 				</div>
 			</div>
 		</div>

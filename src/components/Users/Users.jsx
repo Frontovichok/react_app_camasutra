@@ -1,43 +1,37 @@
 import React from 'react'
 import User from './User/User'
+import styles from './Users.module.css'
 
 function Users(props) {
-	if (props.users.length === 0) {
-		props.setUsers([
-			{
-				id: 1,
-				followed: false,
-				fullName: 'Machtiev Djamal Labazanovich',
-				status: 'very welll',
-				location: { city: 'Moscow', country: 'Russia' },
-				imageUrl:
-					'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg',
-			},
-			{
-				id: 2,
-				followed: false,
-				fullName: 'Magomedov Magomed Ruslanovich',
-				status: 'all is good',
-				location: { city: 'Makhachkala', country: 'Russia' },
-				imageUrl:
-					'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg',
-			},
-			{
-				id: 3,
-				followed: true,
-				fullName: 'Dimych Ivan Sergeevich',
-				status: 'all is good',
-				location: { city: 'Voronej', country: 'Russia' },
-				imageUrl:
-					'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg',
-			},
-		])
-	}
-	console.log(props.users)
-	return props.users.map((user) => (
+	return (
 		<div>
-			<User key={user.id} toggleFollow={props.toggleFollow} userData={user} />
+			<div
+				className={styles.pagesContainer}
+				onClick={(e) => props.changeCurrentPage(e)}
+			>
+				{props.pages.map((pageNumb) => (
+					<button
+						key={pageNumb}
+						className={
+							props.currentPage === pageNumb
+								? `${styles.selectedPage} ${styles.page}`
+								: styles.page
+						}
+					>
+						{pageNumb}
+					</button>
+				))}
+			</div>
+			<div>
+				{props.users.map((user) => (
+					<User
+						key={user.id}
+						toggleFollow={props.toggleFollow}
+						userData={user}
+					/>
+				))}
+			</div>
 		</div>
-	))
+	)
 }
 export default Users
