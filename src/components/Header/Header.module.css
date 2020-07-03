@@ -6,3 +6,7 @@
 	padding: 10px;
 	max-width: 50px;
 }
+.loginContainer {
+	float: right;
+	padding-right: 10px;
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './User.module.css'
 import { NavLink } from 'react-router-dom'
+import * as axios from 'axios'
 
 function User(props) {
 	let userData = props.userData
@@ -21,7 +22,46 @@ function User(props) {
 					/>
 				</NavLink>
 				<button
-					onClick={() => props.toggleFollow(userData.id)}
+					disabled={props.followingInProgress}
+					onClick={() => {
+						props.toggleFollowingProgress(true)
+						if (userData.followed) {
+							axios
+								.delete(
+									`https://social-network.samuraijs.com/api/1.0/follow/${userData.id}`,
+									{
+										withCredentials: true,
+										headers: {
+											'API-KEY': '60825fb6-5434-42e8-8303-e52d102b3191',
+										},
+									}
+								)
+								.then((response) => {
+									if (response.data.resultCode === 0) {
+										props.toggleFollow(userData.id)
+									}
+									props.toggleFollowingProgress(false)
+								})
+						} else {
+							axios
+								.post(
+									`https://social-network.samuraijs.com/api/1.0/follow/${userData.id}`,
+									{},
+									{
+										withCredentials: true,
+										headers: {
+											'API-KEY': '60825fb6-5434-42e8-8303-e52d102b3191',
+										},
+									}
+								)
+								.then((response) => {
+									if (response.data.resultCode === 0) {
+										props.toggleFollow(userData.id)
+									}
+									props.toggleFollowingProgress(false)
+								})
+						}
+					}}
 					className={userData.followed ? styles.followed : ''}
 				>
 					{userData.followed ? 'отписаться' : 'подписаться'}
@@ -37,3 +77,12 @@ function User(props) {
 }
 
 export default User
+
+{
+	/* <button
+	onClick={() => props.toggleFollow(userData.id)}
+	className={userData.followed ? styles.followed : ''}
+>
+	{userData.followed ? 'отписаться' : 'подписаться'}
+</button> */
+}

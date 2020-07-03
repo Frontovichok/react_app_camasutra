@@ -28,6 +28,8 @@ function Users(props) {
 						key={user.id}
 						toggleFollow={props.toggleFollow}
 						userData={user}
+						followingInProgress={props.followingInProgress}
+						toggleFollowingProgress={props.toggleFollowingProgress}
 					/>
 				))}
 			</div>
