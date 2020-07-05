@@ -11,7 +11,7 @@ function Header(props) {
 			/>
 			<div className={styles.loginContainer}>
 				{props.isAuth === true ? (
-					<NavLink to={`/${props.authData.userId}`}>
+					<NavLink to={`/profile/${props.authData.userId}`}>
 						{props.authData.login}
 					</NavLink>
 				) : (

@@ -22,9 +22,13 @@ function User(props) {
 					/>
 				</NavLink>
 				<button
-					disabled={props.followingInProgress}
+					disabled={
+						props.followingInProgress.includes(userData.id) ? true : false
+					}
 					onClick={() => {
-						props.toggleFollowingProgress(true)
+						console.log(props.followingInProgress.includes(userData.id))
+						props.toggleFollowingProgress(true, userData.id)
+						console.log(window.store.getState().usersPage)
 						if (userData.followed) {
 							axios
 								.delete(
@@ -40,7 +44,7 @@ function User(props) {
 									if (response.data.resultCode === 0) {
 										props.toggleFollow(userData.id)
 									}
-									props.toggleFollowingProgress(false)
+									props.toggleFollowingProgress(false, userData.id)
 								})
 						} else {
 							axios
@@ -58,7 +62,7 @@ function User(props) {
 									if (response.data.resultCode === 0) {
 										props.toggleFollow(userData.id)
 									}
-									props.toggleFollowingProgress(false)
+									props.toggleFollowingProgress(false, userData.id)
 								})
 						}
 					}}
