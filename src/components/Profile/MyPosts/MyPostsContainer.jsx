@@ -1,24 +1,16 @@
 import MyPosts from './MyPosts'
 import { addPost } from '../../../redux/reducers/profile-reducer'
 import { connect } from 'react-redux'
+import * as axios from 'axios'
 
-let getImageUrl = async () => {
-	try {
-		let response = await fetch(
-			'https://source.unsplash.com/user/aaronburden/200x120',
-			{
-				method: 'GET',
-				headers: {
-					'x-rapidapi-host': 'bing-image-search1.p.rapidapi.com',
-					'x-rapidapi-key':
-						'a300223d4bmsh564329b20d00502p1ecc60jsn1d1c42f3c9a4',
-				},
-			}
-		)
-		return response.url
-	} catch (err) {
-		console.log('Error:' + err)
-	}
+function getImageUrl() {
+	return axios
+		.get('https://source.unsplash.com/collection/190727/200x120', {
+			responseType: 'json',
+		})
+		.then((response) => {
+			return response.request.responseURL
+		})
 }
 
 function mapStateToProps(state) {

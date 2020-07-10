@@ -1,5 +1,8 @@
+import { profileAPI } from '../../api/api.js'
+
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
+const SET_STATUS = 'SET-STATUS'
 
 let initialState = {
 	posts: [
@@ -29,6 +32,7 @@ let initialState = {
 		},
 	],
 	profile: {},
+	status: '',
 }
 
 function profileReducer(state = initialState, action) {
@@ -43,6 +47,8 @@ function profileReducer(state = initialState, action) {
 
 		case SET_USER_PROFILE:
 			return { ...state, profile: action.profile }
+		case SET_STATUS:
+			return { ...state, status: action.status }
 		default:
 			return state
 	}
@@ -57,7 +63,40 @@ export const addPost = (message, imageUrl) => {
 export const setUserProfile = (profile) => {
 	return {
 		type: SET_USER_PROFILE,
-		profile: profile,
+		profile,
+	}
+}
+
+export const setStatus = (status) => {
+	return {
+		type: SET_STATUS,
+		status,
+	}
+}
+
+export function getUserProfile(userId) {
+	return (dispath) => {
+		profileAPI.getUserProfile(userId).then((userData) => {
+			dispath(setUserProfile(userData))
+		})
+	}
+}
+
+export function getStatus(userId) {
+	return (dispath) => {
+		profileAPI.getStatus(userId).then((response) => {
+			dispath(setStatus(response.data))
+		})
+	}
+}
+
+export function updateStatus(status) {
+	return (dispath) => {
+		profileAPI.updateStatus(status).then((response) => {
+			if (response.data.resultCode === 0) {
+				dispath(setStatus(status))
+			}
+		})
 	}
 }
 

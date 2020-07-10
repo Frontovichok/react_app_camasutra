@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Messages.module.css'
 import ChatWith from './ChatWith/ChatWith'
 import Message from './Message/Message'
+import AddMessageForm from './AddMessageForm/AddMessageForm'
 
 function Messages(props) {
 	let chatWithElements = props.messagesPage.chats.map((chat) => (
@@ -15,21 +16,18 @@ function Messages(props) {
 	let messagesElements = props.messagesPage.chats[0].messages.map(
 		(message, i) => <Message key={i} message={message.message} />
 	)
+	let { chatId } = props.match.params
+
+	const submit = (values) => {
+		props.sendMessage(chatId, values.newMessageBody)
+	}
 
 	return (
 		<div className={styles.messages_container}>
 			<div className={styles.chats}>{chatWithElements}</div>
 			<div className={styles.messages}>
 				<div>{messagesElements}</div>
-				<div>
-					<textarea
-						onChange={(e) => props.changeMessageBody(e.target.value)}
-						value={props.messagesPage.newMessageBody}
-					/>
-					<button onClick={() => props.sendMessage(props.match.params.chatId)}>
-						Send message
-					</button>
-				</div>
+				<AddMessageForm onSubmit={submit} />
 			</div>
 		</div>
 	)

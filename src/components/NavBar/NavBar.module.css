@@ -4,7 +4,12 @@
 }
 .item {
 	font-size: 14px;
-	padding-bottom: 4px;
+	margin-bottom: 4px;
+	padding: 3px;
+}
+.item:hover {
+	cursor: pointer;
+	background-color: #1f8fff1f;
 }
 .item a {
 	color: blue;

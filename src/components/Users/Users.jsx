@@ -1,6 +1,7 @@
 import React from 'react'
 import User from './User/User'
 import styles from './Users.module.css'
+import { NavLink } from 'react-router-dom'
 
 function Users(props) {
 	return (
@@ -10,26 +11,25 @@ function Users(props) {
 				onClick={(e) => props.changeCurrentPage(e)}
 			>
 				{props.pages.map((pageNumb) => (
-					<button
+					<NavLink
+						to={`?page=${pageNumb}`}
 						key={pageNumb}
-						className={
-							props.currentPage === pageNumb
-								? `${styles.selectedPage} ${styles.page}`
-								: styles.page
-						}
+						className={styles.page}
+						activeClassName={styles.selectedPage}
+						isActive={() => (+props.currentPage === +pageNumb ? true : false)}
 					>
 						{pageNumb}
-					</button>
+					</NavLink>
 				))}
 			</div>
 			<div>
 				{props.users.map((user) => (
 					<User
 						key={user.id}
-						toggleFollow={props.toggleFollow}
 						userData={user}
 						followingInProgress={props.followingInProgress}
-						toggleFollowingProgress={props.toggleFollowingProgress}
+						followToUser={props.followToUser}
+						unfollowFromUser={props.unfollowFromUser}
 					/>
 				))}
 			</div>

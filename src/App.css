@@ -1,5 +1,7 @@
 .body {
 	background-color: #edeef0;
+	overflow-x: hidden;
+	margin-right: calc(-1 * (100vw - 100%));
 }
 .app-wrapper {
 	display: grid;

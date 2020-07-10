@@ -7,9 +7,9 @@ import { Route, BrowserRouter } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import MessagesContainer from './components/Messages/MessagesContainer'
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
 
 function App() {
-	console.log('app')
 	return (
 		<BrowserRouter>
 			<div className='app-wrapper'>
@@ -21,7 +21,8 @@ function App() {
 						path='/messages/:chatId?'
 						render={() => <MessagesContainer />}
 					/>
-					<Route path='/users' render={() => <UsersContainer />} />
+					<Route path='/users:page?' render={() => <UsersContainer />} />
+					<Route path='/login' render={() => <Login />} />
 				</div>
 			</div>
 		</BrowserRouter>

@@ -1,5 +1,4 @@
 const SEND_MESSAGE = 'SEND-MESSAGE'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 
 let initialState = {
 	chats: [
@@ -65,7 +64,6 @@ let initialState = {
 			messages: [],
 		},
 	],
-	newMessageBody: '',
 }
 
 function messagesReducer(state = initialState, action) {
@@ -75,7 +73,7 @@ function messagesReducer(state = initialState, action) {
 				from: 'Я',
 				to: state.chats[action.chatId].name,
 				date: new Date().toLocaleString(),
-				message: state.newMessageBody,
+				message: action.newMessageBody,
 			}
 			return {
 				...state,
@@ -85,27 +83,17 @@ function messagesReducer(state = initialState, action) {
 					}
 					return chatWith
 				}),
-				newMessageBody: '',
 			}
-		case UPDATE_NEW_MESSAGE_BODY:
-			return { ...state, newMessageBody: action.body }
-
 		default:
 			return state
 	}
 }
 
-export const updateNewMessageBodyActionCreator = (body) => {
-	return {
-		type: UPDATE_NEW_MESSAGE_BODY,
-		body: body,
-	}
-}
-
-export const sendMessageActionCreator = (id) => {
+export const sendMessageActionCreator = (id = 0, newMessageBody) => {
 	return {
 		type: SEND_MESSAGE,
 		chatId: id,
+		newMessageBody,
 	}
 }
 
