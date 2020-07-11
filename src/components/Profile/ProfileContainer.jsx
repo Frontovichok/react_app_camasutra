@@ -14,9 +14,8 @@ class ProfileContainer extends React.Component {
 	componentDidMount() {
 		let userId = this.props.match.params.userId
 			? this.props.match.params.userId
-			: 2
+			: 9053
 		this.props.getUserProfile(userId)
-		console.log(userId)
 		this.props.getStatus(userId)
 	}
 	render() {
@@ -34,14 +33,16 @@ function mapStateToProps(state) {
 		status: state.profilePage.status,
 	}
 }
-const dispatchers = {
-	getUserProfile,
-	getStatus,
-	updateStatus,
+function mapDispatchToProps(dispatch) {
+	return {
+		getUserProfile: (userId) => dispatch(getUserProfile(userId)),
+		getStatus: (userId) => dispatch(getStatus(userId)),
+		updateStatus: (status) => dispatch(updateStatus(status)),
+	}
 }
 
 export default compose(
-	connect(mapStateToProps, dispatchers),
+	connect(mapStateToProps, mapDispatchToProps),
 	withRouter
 	// withAuthRedirect
 )(ProfileContainer)

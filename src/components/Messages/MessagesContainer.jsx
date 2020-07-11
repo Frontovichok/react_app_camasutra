@@ -19,6 +19,6 @@ function mapDispatchToPtops(dispatch) {
 
 export default compose(
 	connect(mapStateToProps, mapDispatchToPtops),
-	withAuthRedirect,
+	// withAuthRedirect,
 	withRouter
 )(Messages)

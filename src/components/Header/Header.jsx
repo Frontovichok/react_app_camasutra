@@ -10,10 +10,20 @@ function Header(props) {
 				src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Apple_logo_grey.svg/1200px-Apple_logo_grey.svg.png'
 			/>
 			<div className={styles.loginContainer}>
-				{props.isAuth === true ? (
-					<NavLink to={`/profile/${props.authData.userId}`}>
-						{props.authData.login}
-					</NavLink>
+				{props.isAuth ? (
+					<>
+						<NavLink to={`/profile/${props.authData.userId}`}>
+							{props.authData.login}
+						</NavLink>
+						<span> </span>
+						<button
+							onClick={() => {
+								props.logout()
+							}}
+						>
+							logout
+						</button>
+					</>
 				) : (
 					<NavLink to={'/login'}>Login</NavLink>
 				)}
