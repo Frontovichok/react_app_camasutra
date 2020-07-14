@@ -31,6 +31,8 @@ function mapStateToProps(state) {
 	return {
 		profile: state.profilePage.profile,
 		status: state.profilePage.status,
+		authorizedUserId: state.auth.userId,
+		isAuth: state.auth.isAuth,
 	}
 }
 function mapDispatchToProps(dispatch) {
@@ -43,6 +45,6 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
 	connect(mapStateToProps, mapDispatchToProps),
-	withRouter
-	// withAuthRedirect
+	withRouter,
+	withAuthRedirect
 )(ProfileContainer)

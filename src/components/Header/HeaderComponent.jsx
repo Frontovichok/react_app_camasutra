@@ -4,9 +4,6 @@ import { connect } from 'react-redux'
 import { getAuthUserData, logout } from '../../redux/reducers/auth-reducer'
 
 class HeaderComponent extends React.Component {
-	componentDidMount() {
-		this.props.getAuthUserData()
-	}
 	render() {
 		return (
 			<Header
@@ -22,7 +19,6 @@ function mapStateToProps(state) {
 	return { isAuth: state.auth.isAuth, authData: state.auth }
 }
 let dispatchers = {
-	getAuthUserData,
 	logout,
 }
 export default connect(mapStateToProps, dispatchers)(HeaderComponent)

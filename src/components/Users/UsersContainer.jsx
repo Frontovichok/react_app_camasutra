@@ -3,7 +3,7 @@ import Users from './Users'
 import { connect } from 'react-redux'
 import {
 	setCurrentPage,
-	getUsers,
+	requestGetUsers,
 	followToUser,
 	unfollowFromUser,
 } from '../../redux/reducers/users-reducer'
@@ -11,8 +11,17 @@ import Preloader from '../Common/Preloaders/Preloader2/Preloader2'
 import { withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import { compose } from 'redux'
+import {
+	getUsers,
+	getUsersOnPage,
+	getTotalUsersCount,
+	getCurrentPage,
+	getIsFetching,
+	getFollowingInProgress,
+	getUsersSuperSelector,
+} from '../../redux/reducers/users-selectors'
 
-class UsersAPIComponent extends React.Component {
+class UsersContainer extends React.Component {
 	componentDidMount() {
 		let currentPage
 		let params = new URLSearchParams(this.props.location.search)
@@ -22,16 +31,16 @@ class UsersAPIComponent extends React.Component {
 		} else {
 			currentPage = this.props.currentPage
 		}
-		this.props.getUsers(currentPage, this.props.usersOnPage)
+		this.props.requestGetUsers(currentPage, this.props.usersOnPage)
 	}
 
 	changeCurrentPage = (e) => {
 		let pageNumber = e.target.textContent
-		this.props.setCurrentPage(pageNumber)
-		this.props.getUsers(pageNumber, this.props.usersOnPage)
+		this.props.requestGetUsers(pageNumber, this.props.usersOnPage)
 	}
 
 	render() {
+		console.log('render')
 		let pagesCount = Math.ceil(
 			this.props.totalUsersCount / this.props.usersOnPage
 		)
@@ -59,18 +68,19 @@ class UsersAPIComponent extends React.Component {
 }
 
 function mapStateToProps(state) {
+	console.log('mapStateToProps')
 	return {
-		users: state.usersPage.users,
-		usersOnPage: state.usersPage.usersOnPage,
-		totalUsersCount: state.usersPage.totalUsersCount,
-		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching,
-		followingInProgress: state.usersPage.followingInProgress,
+		users: getUsersSuperSelector(state),
+		usersOnPage: getUsersOnPage(state),
+		totalUsersCount: getTotalUsersCount(state),
+		currentPage: getCurrentPage(state),
+		isFetching: getIsFetching(state),
+		followingInProgress: getFollowingInProgress(state),
 	}
 }
 let dispatchers = {
 	setCurrentPage,
-	getUsers,
+	requestGetUsers,
 	followToUser,
 	unfollowFromUser,
 }
@@ -78,4 +88,4 @@ export default compose(
 	connect(mapStateToProps, { ...dispatchers }),
 	withRouter
 	// withAuthRedirect
-)(UsersAPIComponent)
+)(UsersContainer)

@@ -1,4 +1,5 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import appReducer from './reducers/app-reducer'
 import profileReducer from './reducers/profile-reducer'
 import messagesReducer from './reducers/messages-reducer'
 import usersReducer from './reducers/users-reducer'
@@ -7,6 +8,7 @@ import thunkMiddleware from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 
 let reducers = combineReducers({
+	app: appReducer,
 	profilePage: profileReducer,
 	messagesPage: messagesReducer,
 	usersPage: usersReducer,
