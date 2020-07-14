@@ -40,7 +40,6 @@ class UsersContainer extends React.Component {
 	}
 
 	render() {
-		console.log('render')
 		let pagesCount = Math.ceil(
 			this.props.totalUsersCount / this.props.usersOnPage
 		)
@@ -68,9 +67,8 @@ class UsersContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-	console.log('mapStateToProps')
 	return {
-		users: getUsersSuperSelector(state),
+		users: getUsers(state),
 		usersOnPage: getUsersOnPage(state),
 		totalUsersCount: getTotalUsersCount(state),
 		currentPage: getCurrentPage(state),

@@ -5,6 +5,7 @@ import messagesReducer from './reducers/messages-reducer'
 import usersReducer from './reducers/users-reducer'
 import authReducer from './reducers/auth-reducer'
 import thunkMiddleware from 'redux-thunk'
+import loggerMiddleware from 'redux-logger'
 import { reducer as formReducer } from 'redux-form'
 
 let reducers = combineReducers({
@@ -19,7 +20,7 @@ let reducers = combineReducers({
 let store = createStore(
 	reducers,
 	compose(
-		applyMiddleware(thunkMiddleware),
+		applyMiddleware(loggerMiddleware, thunkMiddleware),
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	)
 )

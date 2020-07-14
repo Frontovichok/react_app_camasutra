@@ -6,7 +6,6 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS'
-const FAKE_COUNT = 'FAKE-COUNT'
 
 let initialState = {
 	users: [],
@@ -15,13 +14,10 @@ let initialState = {
 	currentPage: 1,
 	isFetching: false,
 	followingInProgress: [],
-	fakeCount: 0,
 }
 
 function usersReducer(state = initialState, action) {
 	switch (action.type) {
-		case FAKE_COUNT:
-			return { ...state, fakeCount: state.fakeCount + 1 }
 		case TOGGLE_FOLLOW:
 			return {
 				...state,

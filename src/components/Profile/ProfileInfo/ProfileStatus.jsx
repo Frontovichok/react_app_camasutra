@@ -25,16 +25,7 @@ class ProfileStatus extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.state.editMode ? (
-					<div>
-						<input
-							autoFocus={true}
-							onBlur={this.deactivateEditMode}
-							onChange={(e) => this.changeStatus(e)}
-							value={this.state.status}
-						/>
-					</div>
-				) : (
+				{!this.state.editMode ? (
 					<div className={styles.status_span_wrapper}>
 						<span
 							className={styles.status_span}
@@ -42,6 +33,15 @@ class ProfileStatus extends React.Component {
 						>
 							{this.props.status || '--'}
 						</span>
+					</div>
+				) : (
+					<div>
+						<input
+							autoFocus={true}
+							onBlur={this.deactivateEditMode}
+							onChange={(e) => this.changeStatus(e)}
+							value={this.state.status}
+						/>
 					</div>
 				)}
 			</div>
