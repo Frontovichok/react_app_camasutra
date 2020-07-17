@@ -11,6 +11,12 @@ import { compose } from 'redux'
 import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 
 class ProfileContainer extends React.Component {
+	shouldComponentUpdate() {
+		console.log('shouldComponentUpdate')
+	}
+	componentDidUpdate() {
+		console.log('componentDidUpdate')
+	}
 	componentDidMount() {
 		let userId = this.props.match.params.userId
 			? this.props.match.params.userId

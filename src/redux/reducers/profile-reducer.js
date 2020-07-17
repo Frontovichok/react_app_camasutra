@@ -75,28 +75,25 @@ export const setStatus = (status) => {
 }
 
 export function getUserProfile(userId) {
-	return (dispath) => {
-		profileAPI.getUserProfile(userId).then((userData) => {
-			dispath(setUserProfile(userData))
-		})
+	return async (dispath) => {
+		let response = await profileAPI.getUserProfile(userId)
+		dispath(setUserProfile(response))
 	}
 }
 
 export function getStatus(userId) {
-	return (dispath) => {
-		profileAPI.getStatus(userId).then((response) => {
-			dispath(setStatus(response.data))
-		})
+	return async (dispath) => {
+		let response = await profileAPI.getStatus(userId)
+		dispath(setStatus(response.data))
 	}
 }
 
 export function updateStatus(status) {
-	return (dispath) => {
-		profileAPI.updateStatus(status).then((response) => {
-			if (response.data.resultCode === 0) {
-				dispath(setStatus(status))
-			}
-		})
+	return async (dispath) => {
+		let response = await profileAPI.updateStatus(status)
+		if (response.data.resultCode === 0) {
+			dispath(setStatus(status))
+		}
 	}
 }
 

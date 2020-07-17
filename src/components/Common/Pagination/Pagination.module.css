@@ -1,0 +1,44 @@
+.paginationContainer ul {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+}
+.page,
+.previousPage,
+.breakPages,
+.nextPage {
+	color: blue;
+	border: solid 1px blue;
+	min-width: 35px;
+	text-align: center;
+	box-shadow: 0 1px 3px 1px rgb(35 54 109 / 28%);
+	user-select: none;
+}
+.page:hover,
+.previousPage a:hover,
+.nextPage a:hover,
+.breakPages a:hover {
+	background-color: lightblue;
+	cursor: pointer;
+}
+.previousPage {
+	margin-right: 10px;
+}
+.nextPage {
+	margin-left: 10px;
+}
+.page.active .pageLink {
+	color: red;
+	font-weight: bold;
+}
+.pageLink,
+.previousPage a,
+.nextPage a,
+.breakPages a {
+	display: inline-block;
+	padding: 5px 10px;
+	width: 100%;
+}
+.pageLink:focus {
+	outline: none;
+}

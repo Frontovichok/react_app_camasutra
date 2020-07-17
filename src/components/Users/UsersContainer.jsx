@@ -7,9 +7,7 @@ import {
 	followToUser,
 	unfollowFromUser,
 } from '../../redux/reducers/users-reducer'
-import Preloader from '../Common/Preloaders/Preloader2/Preloader2'
 import { withRouter } from 'react-router-dom'
-import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import { compose } from 'redux'
 import {
 	getUsers,
@@ -18,7 +16,6 @@ import {
 	getCurrentPage,
 	getIsFetching,
 	getFollowingInProgress,
-	getUsersSuperSelector,
 } from '../../redux/reducers/users-selectors'
 
 class UsersContainer extends React.Component {
@@ -26,16 +23,15 @@ class UsersContainer extends React.Component {
 		let currentPage
 		let params = new URLSearchParams(this.props.location.search)
 		if (params.has('page')) {
-			this.props.setCurrentPage(params.get('page'))
-			currentPage = params.get('page')
+			currentPage = +params.get('page')
+			this.props.setCurrentPage(currentPage)
 		} else {
 			currentPage = this.props.currentPage
 		}
 		this.props.requestGetUsers(currentPage, this.props.usersOnPage)
 	}
 
-	changeCurrentPage = (e) => {
-		let pageNumber = e.target.textContent
+	changeCurrentPage = (pageNumber) => {
 		this.props.requestGetUsers(pageNumber, this.props.usersOnPage)
 	}
 
@@ -49,7 +45,6 @@ class UsersContainer extends React.Component {
 		}
 		return (
 			<div>
-				{this.props.isFetching ? <Preloader /> : null}
 				<Users
 					changeCurrentPage={this.changeCurrentPage}
 					pages={pages}
@@ -60,6 +55,7 @@ class UsersContainer extends React.Component {
 					followingInProgress={this.props.followingInProgress}
 					followToUser={this.props.followToUser}
 					unfollowFromUser={this.props.unfollowFromUser}
+					isFetching={this.props.isFetching}
 				/>
 			</div>
 		)
@@ -85,5 +81,4 @@ let dispatchers = {
 export default compose(
 	connect(mapStateToProps, { ...dispatchers }),
 	withRouter
-	// withAuthRedirect
 )(UsersContainer)

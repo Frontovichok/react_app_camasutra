@@ -9,37 +9,37 @@ function NavBar() {
 			<div className={styles.item}>
 				<Icon name='user outline' />
 				<NavLink to='/profile' activeClassName={styles.active}>
-					Profile
+					Профиль
 				</NavLink>
 			</div>
 			<div className={styles.item}>
 				<Icon className='discussions outline' />
 				<NavLink to='/messages' activeClassName={styles.active}>
-					Messages
+					Сообщения
 				</NavLink>
 			</div>
 			<div className={styles.item}>
 				<Icon className='users' />
 				<NavLink exact to='/users' activeClassName={styles.active}>
-					Users
+					Пользователи
 				</NavLink>
 			</div>
 			<div className={styles.item}>
 				<Icon name='newspaper outline' />
 				<NavLink to='/news' activeClassName={styles.active}>
-					News
+					Новости
 				</NavLink>
 			</div>
 			<div className={styles.item}>
 				<Icon name='music' />
 				<NavLink to='/music' activeClassName={styles.active}>
-					Music
+					Музыка
 				</NavLink>
 			</div>
 			<div className={styles.item}>
 				<Icon name='cogs' />
 				<NavLink to='/settings' activeClassName={styles.active}>
-					Settings
+					Настройки
 				</NavLink>
 			</div>
 		</nav>

@@ -1,18 +1,17 @@
 import React from 'react'
 import styles from './ProfileInfo.module.css'
-import ProfileStatus from './ProfileStatus'
 import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
 function ProfileInfo(props) {
 	return (
 		<div className={styles.profileInfo}>
-			{/* <div>
+			<div>
 				<img
 					alt='panorama'
 					src='https://images.unsplash.com/photo-1513735539099-cf6e5d559d82?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
 					className={styles.panoramaImage}
 				></img>
-			</div> */}
+			</div>
 			<div className={styles.descriptionBlock}>
 				<img
 					alt='profile_image'

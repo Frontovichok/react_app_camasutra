@@ -7,21 +7,24 @@ function Header(props) {
 		<header className={styles.header}>
 			<img
 				alt='logo'
-				src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Apple_logo_grey.svg/1200px-Apple_logo_grey.svg.png'
+				src='https://i.pinimg.com/originals/b1/85/9b/b1859bdac7d42d4a0a5a673bc4265564.png'
 			/>
 			<div className={styles.loginContainer}>
 				{props.isAuth ? (
 					<>
-						<NavLink to={`/profile/${props.authData.userId}`}>
+						<NavLink
+							to={`/profile/${props.authData.userId}`}
+							className={styles.userProfileLink}
+						>
 							{props.authData.login}
 						</NavLink>
-						<span> </span>
 						<button
 							onClick={() => {
 								props.logout()
 							}}
+							className={styles.logoutBtn}
 						>
-							logout
+							Выйти
 						</button>
 					</>
 				) : (

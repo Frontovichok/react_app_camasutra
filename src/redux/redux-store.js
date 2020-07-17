@@ -17,12 +17,11 @@ let reducers = combineReducers({
 	form: formReducer,
 })
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 let store = createStore(
 	reducers,
-	compose(
-		applyMiddleware(loggerMiddleware, thunkMiddleware),
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-	)
+	composeEnhancers(applyMiddleware(loggerMiddleware, thunkMiddleware))
 )
 
 window.store = store

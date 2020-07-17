@@ -24,38 +24,37 @@ export function setAuthUserData(userId, email, login, isAuth) {
 }
 
 export function getAuthUserData() {
-	return (dispatch) => {
-		return authAPI.authMe().then((authData) => {
-			if (authData.resultCode === 0) {
-				let { id, email, login } = authData.data
-				dispatch(setAuthUserData(id, email, login, true))
-			}
-		})
+	return async (dispatch) => {
+		let response = await authAPI.authMe()
+		if (response.resultCode === 0) {
+			let { id, email, login } = response.data
+			dispatch(setAuthUserData(id, email, login, true))
+		}
+		return response
 	}
 }
 export function login(email, password, rememberMe) {
-	return (dispatch) => {
-		authAPI.login(email, password, rememberMe).then((response) => {
-			if (response.resultCode === 0) {
-				dispatch(getAuthUserData())
-			} else if (response.resultCode === 1) {
-				dispatch(
-					stopSubmit('login', {
-						_error: 'email or password is not correct',
-					})
-				)
-			}
-		})
+	return async (dispatch) => {
+		let response = await authAPI.login(email, password, rememberMe)
+
+		if (response.resultCode === 0) {
+			dispatch(getAuthUserData())
+		} else if (response.resultCode === 1) {
+			dispatch(
+				stopSubmit('login', {
+					_error: 'email or password is not correct',
+				})
+			)
+		}
 	}
 }
 
 export function logout() {
-	return (dispatch) => {
-		authAPI.logout().then((response) => {
-			if (response.resultCode === 0) {
-				dispatch(setAuthUserData(null, null, null, false))
-			}
-		})
+	return async (dispatch) => {
+		let response = await authAPI.logout()
+		if (response.resultCode === 0) {
+			dispatch(setAuthUserData(null, null, null, false))
+		}
 	}
 }
 
