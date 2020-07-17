@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
-import styles from './Pagination.module.css'
+import styles from './Pagination.module.scss'
 import { withRouter } from 'react-router'
 
 function Pagination(props) {
